@@ -1,0 +1,27 @@
+name: Compilar Meu Jogo
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Pegar codigo do repositorio
+      uses: actions/checkout@v4
+
+    - name: Instalar Compilador
+      run: sudo apt-get update && sudo apt-get install -y gcc
+
+    - name: Gerar o arquivo do jogo
+      run: gcc main.c -o meujogo.gba
+
+    - name: Preparar para Download
+      uses: actions/upload-artifact@v4
+      with:
+        name: arquivo-do-lemoroid
+        path: meujogo.gba
+        
