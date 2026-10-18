@@ -9,9 +9,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     
-    # Usamos um ambiente que já possui o compilador configurado
+    # Apontando para a versão exata e ativa do GBDK no servidor
     container:
-      image: ghcr.io/gbdk-2020/gbdk-2020:latest
+      image: ghcr.io/gbdk-2020/gbdk-2020:4.3.0
 
     steps:
     - name: Pegar codigo do repositorio
