@@ -8,18 +8,16 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Aqui mandamos o GitHub usar o sistema com o compilador já pronto
+    container:
+      image: giginet/gbdk:latest
 
     steps:
     - name: Pegar codigo do repositorio
       uses: actions/checkout@v4
 
-    - name: Instalar GBDK do Ubuntu
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y gbdk
-
     - name: Gerar o arquivo do jogo
-      run: gbdk-lcc main.c -o meujogo.gb
+      run: lcc main.c -o meujogo.gb
 
     - name: Preparar para Download
       uses: actions/upload-artifact@v4
