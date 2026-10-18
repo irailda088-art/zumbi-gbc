@@ -13,18 +13,17 @@ jobs:
     - name: Pegar codigo do repositorio
       uses: actions/checkout@v4
 
-    - name: Instalar o GBDK Atualizado
+    - name: Instalar GBDK do Ubuntu
       run: |
         sudo apt-get update
-        sudo apt-get install -y wget
-        wget https://github.com
-        tar -xzf gbdk-linux64.tar.gz
+        sudo apt-get install -y gbdk
 
     - name: Gerar o arquivo do jogo
-      run: ./gbdk/bin/lcc main.c -o meujogo.gb
+      run: gbdk-lcc main.c -o meujogo.gb
 
     - name: Preparar para Download
       uses: actions/upload-artifact@v4
       with:
         name: arquivo-do-lemoroid
         path: meujogo.gb
+        
