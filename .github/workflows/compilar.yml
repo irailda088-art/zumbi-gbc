@@ -8,20 +8,17 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
+    # Usamos um ambiente que já possui o compilador configurado
+    container:
+      image: ghcr.io/gbdk-2020/gbdk-2020:latest
 
     steps:
     - name: Pegar codigo do repositorio
       uses: actions/checkout@v4
 
-    - name: Baixar o compilador GBDK
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y wget
-        wget https://github.com
-        tar -xzf gbdk-linux64.tar.gz
-
     - name: Gerar o arquivo do jogo
-      run: ./gbdk/bin/lcc main.c -o meujogo.gb
+      run: lcc main.c -o meujogo.gb
 
     - name: Preparar para Download
       uses: actions/upload-artifact@v4
