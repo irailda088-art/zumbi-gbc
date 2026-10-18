@@ -13,11 +13,14 @@ jobs:
     - name: Pegar codigo do repositorio
       uses: actions/checkout@v4
 
-    - name: Instalar GBDK via Setup Oficial
-      uses: amatehe/setup-gbdk@v1
+    - name: Instalar GBDK Oficial via Snap
+      run: |
+        sudo snap install gbdk --edge
+        # Adiciona o compilador ao caminho do sistema
+        echo "/snap/bin" >> $GITHUB_PATH
 
     - name: Gerar o arquivo do jogo
-      run: lcc main.c -o meujogo.gb
+      run: gbdk.lcc main.c -o meujogo.gb
 
     - name: Preparar para Download
       uses: actions/upload-artifact@v4
