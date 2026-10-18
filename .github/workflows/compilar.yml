@@ -8,13 +8,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # Aqui mandamos o GitHub usar o sistema com o compilador já pronto
-    container:
-      image: giginet/gbdk:latest
 
     steps:
     - name: Pegar codigo do repositorio
       uses: actions/checkout@v4
+
+    - name: Configurar GBDK 2020 Oficial
+      uses: gbdk-2020/gh-action-gbdk@v1.1.0
 
     - name: Gerar o arquivo do jogo
       run: lcc main.c -o meujogo.gb
