@@ -13,16 +13,11 @@ jobs:
     - name: Pegar codigo do repositorio
       uses: actions/checkout@v4
 
-    - name: Instalar GBDK (Compilador de Game Boy)
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y wget bzip2
-        wget https://github.com
-        tar -xzf gbdk-linux64.tar.gz
-        echo "$GITHUB_WORKSPACE/gbdk/bin" >> $GITHUB_PATH
+    - name: Configurar o Compilador GBDK Oficial
+      uses: gbdk-2020/gh-action-gbdk@v1
 
     - name: Gerar o arquivo do jogo
-      run: $GITHUB_WORKSPACE/gbdk/bin/lcc main.c -o meujogo.gb
+      run: lcc main.c -o meujogo.gb
 
     - name: Preparar para Download
       uses: actions/upload-artifact@v4
