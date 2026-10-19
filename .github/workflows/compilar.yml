@@ -17,11 +17,11 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y wget tar
-        # Baixando diretamente do repositório oficial verificado do GBDK-2020
+        # Link oficial verificado e ativo no servidor do GBDK-2020
         wget https://github.com
-        # Testando se o arquivo está íntegro e não corrompido
+        # Descompactando o arquivo verificado
         tar -xzf gbdk-linux64.tar.gz
-        # Configurando o caminho do compilador
+        # Configurando a pasta no sistema
         echo "$GITHUB_WORKSPACE/gbdk/bin" >> $GITHUB_PATH
 
     - name: Gerar o arquivo do jogo
