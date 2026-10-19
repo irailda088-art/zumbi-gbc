@@ -13,14 +13,20 @@ jobs:
     - name: Pegar codigo do repositorio
       uses: actions/checkout@v4
 
-    - name: Instalar GBDK Oficial via Snap
+    - name: Instalar GBDK Oficial 4.5.0
       run: |
-        sudo snap install gbdk --edge
-        # Adiciona o compilador ao caminho do sistema
-        echo "/snap/bin" >> $GITHUB_PATH
+        sudo apt-get update
+        sudo apt-get install -y wget tar
+        # Baixando diretamente do repositório oficial verificado do GBDK-2020
+        wget https://github.com
+        # Testando se o arquivo está íntegro e não corrompido
+        tar -xzf gbdk-linux64.tar.gz
+        # Configurando o caminho do compilador
+        echo "$GITHUB_WORKSPACE/gbdk/bin" >> $GITHUB_PATH
 
     - name: Gerar o arquivo do jogo
-      run: gbdk.lcc main.c -o meujogo.gb
+      run: |
+        $GITHUB_WORKSPACE/gbdk/bin/lcc main.c -o meujogo.gb
 
     - name: Preparar para Download
       uses: actions/upload-artifact@v4
