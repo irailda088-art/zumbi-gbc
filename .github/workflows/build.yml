@@ -1,0 +1,23 @@
+name: Build
+on: [push, workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Baixar GBDK
+        run: |
+          wget -q https://github.com/gbdk-2020/gbdk-2020/releases/download/4.2.0/gbdk-linux64.tar.gz
+          tar xzf gbdk-linux64.tar.gz
+      - name: Compilar
+        run: |
+          ls -la
+          SRC=$(ls *.c | head -n1)
+          echo "Compilando $SRC"
+          mkdir out
+          gbdk/bin/lcc -Wm-yc -Wm-yt0x03 -Wm-yo2 -Wm-ya1 -Wm-ynZUMBI -o out/zumbi.gbc "$SRC"
+          ls -la out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: zumbi-survival
+          path: out/zumbi.gbc
